@@ -1,0 +1,22 @@
+{
+  "name": "cypress-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emosGambler/cypress-example.git"
+  },
+  "author": "Jacek Góraj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emosGambler/cypress-example/issues"
+  },
+  "homepage": "https://github.com/emosGambler/cypress-example#readme",
+  "devDependencies": {
+    "cypress": "^2.1.0"
+  }
+}
