@@ -1,12 +1,17 @@
-describe('Sample test', () => {
-    it('does not much', () => {
-        cy.visit('http://example.cypress.io');
+describe('Google Search', () => {
+    
+    beforeEach(() => {
+        cy.visit('http://google.pl/');
+    });
+
+    it('should url be correct', () => {
         cy.contains('type').click();
         cy.url()
-            .should('include', '/commands/actions');
+        .should('include', 'google.pl/');
+    });
 
-        cy.get('.action-email')
-            .type('jckgrj@gmail.com')
-            .should('have.value', 'jckgrj@gmail.com');
+    it('should query be searched', () => {
+        cy.get('input.gsfi').first()
+            .type('jckgrj@gmail.com');
     });
 });
