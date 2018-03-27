@@ -28,6 +28,17 @@ describe('Google Search', () => {
 
 });
 
+describe('Google Search with commands', () => {
+    
+    before(() => {
+        cy.searchQuery('cypress');
+    });
+    
+    it('should use commands for searching query', () => {
+        expect(cy.get('h3 > a'), 'to.have.length', 10);
+    });
+});
+
 function expect(element, condition, param) {
     element.should(condition.replace('to.', ''), param);
 };
