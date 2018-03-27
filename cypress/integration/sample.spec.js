@@ -1,10 +1,12 @@
 const using = require('jasmine-data-provider');
-const testData = require('./../fixtures/sample.data');
+const data = require('./../fixtures/sample.data');
+const timeout = require('./../fixtures/sample.data').timeout;
+const commonData = require('./../fixtures/sample.data').commonData;
 
 describe('Google', () => {
-    console.log('testData: ', testData);
-    testData.testData.forEach(data => {
-        describe(`Search with query '${data.query}'`, () => {
+    console.log('testData: ', data);
+    data.testData.forEach(d => {
+        describe(`Search with query '${d.query}'`, () => {
         
             before(() => {
                 cy.visit('/');
@@ -12,22 +14,22 @@ describe('Google', () => {
 
             it('should url be correct', () => {
                 cy.contains('type').click();
-                expect(cy.url(), 'to.include', data.google_url);
+                expect(cy.url(), 'to.include', commonData.google_url);
             });
     
             it('should query be searched', () => {
                 cy.get('input.gsfi').first()
-                    .type(`${data.query}`);
-                cy.wait(data.short_timeout);
+                    .type(`${d.query}`);
+                cy.wait(timeout.short);
                 cy.get('ul[role="listbox"] > li').first().click();
                 
-                expect(cy.get('h3 > a'), 'to.have.length', data.number_of_results);
+                expect(cy.get('h3 > a'), 'to.have.length', d.number_of_results);
             });
             
             it('should switch to videos tab', () => {
                 cy.contains('Filmy').click();
                 
-                expect(cy.get('a img'), 'to.have.length', data.number_of_videos);
+                expect(cy.get('a img'), 'to.have.length', d.number_of_videos);
             });
         });
     });
