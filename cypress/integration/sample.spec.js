@@ -3,7 +3,7 @@ describe('Google Search', () => {
     const VIDEOS_INDEX = 0;
     
     before(() => {
-        cy.visit('http://google.pl/');
+        cy.visit('/');
     });
 
     it('should url be correct', () => {
