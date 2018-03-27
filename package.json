@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/emosGambler/cypress-example#readme",
   "devDependencies": {
-    "cypress": "^2.1.0"
+    "cypress": "^2.1.0",
+    "jasmine-data-provider": "^2.2.0"
   }
 }

@@ -1,44 +1,49 @@
-describe('Google Search', () => {
+const using = require('jasmine-data-provider');
+const testData = require('./../fixtures/sample.data');
 
-    const VIDEOS_INDEX = 0;
-    
-    before(() => {
-        cy.visit('/');
-    });
-
-    it('should url be correct', () => {
-        cy.contains('type').click();
-        expect(cy.url(), 'to.include', 'google.pl/');
-    });
-
-    it('should query be searched', () => {
-        cy.get('input.gsfi').first()
-            .type('cypress');
-        cy.wait(500);
-        cy.get('ul[role="listbox"] > li').first().click();
+describe('Google', () => {
+    console.log('testData: ', testData);
+    testData.testData.forEach(data => {
+        describe(`Search with query '${data.query}'`, () => {
         
-        expect(cy.get('h3 > a'), 'to.have.length', 10);
+            before(() => {
+                cy.visit('/');
+            });
+
+            it('should url be correct', () => {
+                cy.contains('type').click();
+                expect(cy.url(), 'to.include', data.google_url);
+            });
+    
+            it('should query be searched', () => {
+                cy.get('input.gsfi').first()
+                    .type(`${data.query}`);
+                cy.wait(data.short_timeout);
+                cy.get('ul[role="listbox"] > li').first().click();
+                
+                expect(cy.get('h3 > a'), 'to.have.length', data.number_of_results);
+            });
+            
+            it('should switch to videos tab', () => {
+                cy.contains('Filmy').click();
+                
+                expect(cy.get('a img'), 'to.have.length', data.number_of_videos);
+            });
+        });
     });
     
-    it('should switch to videos tab', () => {
-        cy.get('div[role="navigation"] div[class*="item"] > a').eq(VIDEOS_INDEX).click();
+    describe('Google Search with commands', () => {
         
-        expect(cy.get('a img'), 'to.have.length', 12);
-    });
-
-});
-
-describe('Google Search with commands', () => {
-    
-    before(() => {
-        cy.searchQuery('cypress');
+        before(() => {
+            cy.searchQuery('cypress');
+        });
+        
+        it('should use commands for searching query', () => {
+            expect(cy.get('h3 > a'), 'to.have.length', 10);
+        });
     });
     
-    it('should use commands for searching query', () => {
-        expect(cy.get('h3 > a'), 'to.have.length', 10);
-    });
+    function expect(element, condition, param) {
+        element.should(condition.replace('to.', ''), param);
+    };
 });
-
-function expect(element, condition, param) {
-    element.should(condition.replace('to.', ''), param);
-};
