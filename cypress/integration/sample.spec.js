@@ -1,11 +1,10 @@
 const using = require('jasmine-data-provider');
-const data = require('./../fixtures/sample.data');
+const data = require('./../fixtures/sample.data').testData;
 const timeout = require('./../fixtures/sample.data').timeout;
 const commonData = require('./../fixtures/sample.data').commonData;
 
 describe('Google', () => {
-    console.log('testData: ', data);
-    data.testData.forEach(d => {
+    data.forEach(d => {
         describe(`Search with query '${d.query}'`, () => {
         
             before(() => {
@@ -34,14 +33,14 @@ describe('Google', () => {
         });
     });
     
-    describe('Google Search with commands', () => {
+    describe('Search with commands', () => {
         
         before(() => {
-            cy.searchQuery('cypress');
+            cy.searchQuery('cypress io');
         });
         
         it('should use commands for searching query', () => {
-            expect(cy.get('h3 > a'), 'to.have.length', 10);
+            expect(cy.get('h3 > a'), 'to.have.length', 13);
         });
     });
     
