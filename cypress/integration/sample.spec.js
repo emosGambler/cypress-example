@@ -13,7 +13,7 @@ describe('Google', () => {
 
             it('should url be correct', () => {
                 cy.contains('type').click();
-                expect(cy.url(), 'to.include', commonData.google_url);
+                expectoPatronum(cy.url(), 'to.include', commonData.google_url);
             });
     
             it('should query be searched', () => {
@@ -22,14 +22,21 @@ describe('Google', () => {
                 cy.wait(timeout.short);
                 cy.get('ul[role="listbox"] > li').first().click();
                 
-                expect(cy.get('h3 > a'), 'to.have.length', d.number_of_results);
+                expectoPatronum(cy.get('h3 > a'), 'to.have.length', d.number_of_results);
             });
             
+            it('should first result have correct title', () => {
+                cy.get('h3 > a').first().then(el => {
+                    expect(el.text()).to.eq(d.first_link_text);
+                });
+            });
+
             it('should switch to videos tab', () => {
                 cy.contains('Filmy').click();
                 
-                expect(cy.get('a img'), 'to.have.length', d.number_of_videos);
+                expectoPatronum(cy.get('a img'), 'to.have.length', d.number_of_videos);
             });
+
         });
     });
     
@@ -40,11 +47,11 @@ describe('Google', () => {
         });
         
         it('should use commands for searching query', () => {
-            expect(cy.get('h3 > a'), 'to.have.length', 13);
+            expectoPatronum(cy.get('h3 > a'), 'to.have.length', 13);
         });
     });
     
-    function expect(element, condition, param) {
+    function expectoPatronum(element, condition, param) {
         element.should(condition.replace('to.', ''), param);
     };
 });
