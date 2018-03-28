@@ -5,7 +5,7 @@ const commonData = require('./../fixtures/sample.data').commonData;
 
 describe('Google', () => {
     data.forEach(d => {
-        describe(`Search with query '${d.query}'`, () => {
+        context(`Search with query '${d.query}'`, () => {
         
             before(() => {
                 cy.visit('/');
@@ -33,7 +33,7 @@ describe('Google', () => {
         });
     });
     
-    describe('Search with commands', () => {
+    context('Search with commands', () => {
         
         before(() => {
             cy.searchQuery('cypress io');
