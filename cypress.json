@@ -1,4 +1,5 @@
 {
   "baseUrl": "http://google.pl",
-  "projectId": "qgrtvx"
+  "projectId": "qgrtvx",
+  "reporter": "mochawesome"
 }
