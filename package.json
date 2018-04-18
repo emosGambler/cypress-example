@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cypress open"
+    "clean": "rimraf mochawesome-report",
+    "test": "npm run clean && cypress open",
+    "test:report": "npm run clean && cypress run --reporter mochawesome --config videoRecording=false && start ./mochawesome-report/mochawesome.html"
   },
   "repository": {
     "type": "git",
@@ -18,6 +20,9 @@
   "homepage": "https://github.com/emosGambler/cypress-example#readme",
   "devDependencies": {
     "cypress": "^2.1.0",
-    "jasmine-data-provider": "^2.2.0"
+    "jasmine-data-provider": "^2.2.0",
+    "mocha": "^5.1.0",
+    "mochawesome": "^3.0.2",
+    "rimraf": "^2.6.2"
   }
 }

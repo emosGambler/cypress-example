@@ -14,7 +14,7 @@ exports.testData = [
 ];
 
 exports.timeout = {
-    short: 500
+    short: 600
 };
 
 exports.commonData = {
