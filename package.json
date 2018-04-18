@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "cypress open",
-    "test:report": "cypress run --reporter mochawesome"
+    "test:report": "cypress run --reporter mochawesome",
+    "test:report:no-record": "cypress run --reporter mochawesome --config videoRecording=false"
   },
   "repository": {
     "type": "git",
